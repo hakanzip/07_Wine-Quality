@@ -1,57 +1,53 @@
-# Titanic - Makine Öğrenmesi Projesi
+# Wine Quality - Makine Öğrenmesi Projesi
 
-Bu proje, Titanic faciası sırasında yolcuların hayatta kalıp kalamayacağını tahmin etmek için makine öğrenmesi teknikleri kullanılarak hazırlanmıştır.
+Bu projede, Şaraplara ait kimyasal özellikler kullanılarak kalite puanlarını analiz etmeye ve tahmin etmeye çalıştım. Veri seti Kaggle üzerinden alındı ve temel bir veri bilimi süreci uygulandı.
 
 ## Veri Seti
 
-Kaynak: https://www.kaggle.com/competitions/titanic  
-Kullanılan dosyalar: train.csv, test.csv
+Kaynak: https://www.kaggle.com/code/fedesoriano/spanish-wine-quality-dataset-introduction  
+Kullanılan dosya: winequality.csv
+
+Bu veri setinde şaraplara ait sabit asitlik, uçucu asitlik, sitrik asit, alkol oranı, sülfatlar gibi birçok özellik ve her şarap için 0–10 arasında bir kalite puanı bulunmaktadır.
 
 ## Proje Aşamaları
 
-1. Veri Analizi ve Görselleştirme (EDA - Exploratory Data Analysis)  
-   Eksik değerler, aykırı değerler ve dağılımlar incelendi.  
-   Cinsiyet, yaş, sınıf gibi değişkenlerin hayatta kalma üzerindeki etkisi analiz edildi.
+### 1. Veri Analizi ve Görselleştirme (EDA – Exploratory Data Analysis)
 
-2. Özellik Mühendisliği (Feature Engineering)  
-   Yeni değişkenler türetildi. Örneğin: FamilySize, IsAlone, Title gibi sütunlar oluşturuldu.  
-   Mevcut verilerden daha anlamlı yapılar üretildi.
+Veri setinin yapısı incelendi (satır, sütun sayısı, veri tipleri).  
+Eksik değer kontrolü yapıldı.  
+Bazı değişkenlerin (alkol, pH, sülfatlar) kalite ile olan ilişkisi grafiklerle gösterildi.  
+Korelasyon matrisi çıkarılarak hangi değişkenlerin kaliteyle daha güçlü ilişkili olduğu görüldü.
 
-3. Ön İşleme ve Dönüştürme (Preprocessing and Transformation)  
-   Eksik veriler dolduruldu.  
-   Kategorik veriler sayısal hale getirildi (One-Hot Encoding, Label Encoding).  
-   Sayısal veriler uygun şekilde ölçeklendirildi.
+### 2. Özellik Mühendisliği (Feature Engineering)
 
-4. Modelleme (Model Training and Selection)  
-   Logistic Regression, Random Forest, XGBoost gibi algoritmalar denendi.  
-   Eğitim ve test ayrımı yapılara performans ölçüldü.
+Şarap türü bilgisi `wine_type` adında yeni bir sütunla eklendi.  
+Kalite skoru sınıflandırma için yeniden etiketlendi (örneğin: düşük, orta, yüksek kalite).  
+Bazı gereksiz sütunlar çıkarıldı ya da gruplanarak sadeleştirildi.
 
-5. Model Değerlendirme (Model Evaluation)  
-   Accuracy, ROC AUC ve Confusion Matrix gibi metriklerle değerlendirme yapıldı.  
-   Modellerin başarıları karşılaştırıldı.
+### 3. Ön İşleme ve Dönüştürme (Preprocessing and Transformation)
 
-## Kullanılan Kütüphaneler
+Kategorik sütunlar sayısal verilere çevrildi (Label Encoding).  
+Veriler ölçeklendirildi (StandardScaler ile).  
+Modelleme için eğitim ve test seti oluşturuldu.
 
-pandas  
-numpy  
-matplotlib  
-seaborn  
-scikit-learn
+### 4. Modelleme (Model Training and Selection)
 
-## Proje Yapısı
+Random Forest ve Lojistik Regresyon gibi temel algoritmalar kullanıldı.  
+Hem sınıflandırma (classification) hem de regresyon (regression) yöntemleri denendi.  
+Model sonuçları test verisi ile değerlendirildi.
 
-01_Titanic/  
-├── data/  
-│   ├── train.csv  
-│  
-├── notebook/  
-│   └── titanic.ipynb  
-├── images/  
-│   └── grafik dosyaları (varsa)  
-├── README.md  
-├── requirements.txt  
-└── .gitignore
+### 5. Model Değerlendirme (Model Evaluation)
 
-## Notlar
+Accuracy, Confusion Matrix, ve R² Score gibi metriklerle performans ölçüldü.  
+Gerçek kalite puanları ile tahmin edilenler karşılaştırıldı.
 
-Bu proje, veri analizinden modellemeye kadar uçtan uca bir veri bilimi sürecini kapsamaktadır. Özellik mühendisliği, model karşılaştırması ve veri sızıntısı kontrolü gibi temel veri bilimi prensiplerine uygun şekilde ilerlenmiştir. Eğitim ve test verileri ayrı tutulmuş, sonuçlar objektif şekilde değerlendirilmiştir.
+## Kullanılan Araçlar
+
+- Python  
+- Pandas, NumPy  
+- Matplotlib, Seaborn  
+- Scikit-learn
+
+## Not
+
+Bu proje bireysel bir eğitim çalışmasıdır. Kaggle’daki örnek projeden esinlenerek yapılmıştır. Veri analizi, görselleştirme ve basit modelleme adımlarını öğrenmek amaçlıdır.
